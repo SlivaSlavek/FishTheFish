@@ -69,6 +69,10 @@ public class MainMenu {
         buttonPlay.setBorderPainted(false);
         buttonPlay.setFocusPainted(false);
         panel.add(buttonPlay);
+        buttonPlay.addActionListener(e -> {
+            new Game();
+            frame.dispose();
+        });
 
         JButton buttonFishIndex=new JButton("FISH INDEX");
         buttonFishIndex.setSize(okraje.width*4,100);
@@ -79,6 +83,10 @@ public class MainMenu {
         buttonFishIndex.setBorderPainted(false);
         buttonFishIndex.setFocusPainted(false);
         panel.add(buttonFishIndex);
+        buttonFishIndex.addActionListener(e -> {
+            new Index();
+            frame.dispose();
+        });
 
         JButton buttonHelp=new JButton("HELP");
         buttonHelp.setSize(okraje.width*4,100);
@@ -89,6 +97,10 @@ public class MainMenu {
         buttonHelp.setBorderPainted(false);
         buttonHelp.setFocusPainted(false);
         panel.add(buttonHelp);
+        buttonHelp.addActionListener(e -> {
+            new Help();
+            frame.dispose();
+        });
 
 
         //frame.add(panel1, BorderLayout.WEST);
