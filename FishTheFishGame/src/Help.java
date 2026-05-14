@@ -27,7 +27,17 @@ public class Help {
         }
         background.setLayout(new GridBagLayout());
 
+        JPanel panel=new JPanel(new BorderLayout());
+        JPanel panelRight=new JPanel(new BorderLayout());
+        JButton homeButton=new JButton("tla4");
 
+        ScrollPane sp=new ScrollPane();
+        // ............
+        sp.setPreferredSize(new Dimension(600,500));
+        panel.add(sp);
+        panelRight.add(homeButton,BorderLayout.NORTH);
+        panel.add(panelRight,BorderLayout.EAST);
+        panel.setPreferredSize(new Dimension(700,600));
 
         //
         //
@@ -37,6 +47,9 @@ public class Help {
 
 
 
+        background.add(panel);
+        //background.add(homeButton,GridBagConstraints.FIRST_LINE_END);
+        //background.add(homeButton);
 
         frame.add(background);
         frame.pack();
