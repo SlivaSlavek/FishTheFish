@@ -1,6 +1,7 @@
 public class Main {
     public static void main(String[] args) {
-        MainMenu mmenu = new MainMenu();
+        GameSystem gameSystem=new GameSystem();
+        MainMenu mmenu = new MainMenu(gameSystem);
     }
 
 

@@ -7,12 +7,15 @@ import java.io.IOException;
 
 public class Help {
     private JFrame frame;
-    public Help() {
+    private GameSystem gameSystem;
+    public Help(GameSystem gameS) {
+        gameSystem=gameS;
         frame=new JFrame("Fish The Fish - HELP");
         init();
     }
     public void init(){
-        Icon homeLogo = new ImageIcon("FishTheFishGame/Resources/HomeIcon.png");
+        Icon homeLogo = new ImageIcon(getClass().getResource("HomeIcon.png"));
+        //Icon homeLogo = new ImageIcon("FishTheFishGame/Resources/HomeIcon.png");
         Dimension okraje=new Dimension(70,600);
         frame.setSize(okraje.width*10,okraje.height);
         frame.setPreferredSize(new Dimension(okraje.width*10, okraje.height));
@@ -22,11 +25,7 @@ public class Help {
         frame.setBackground(new Color(10, 73, 149));
 
         JLabel background;
-        try {
-            background=new JLabel(new ImageIcon(ImageIO.read(new File("FishTheFishGame/Resources/docasnePozadi1.png"))));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        background = new JLabel(new ImageIcon(getClass().getResource("docasnePozadi1.png")));
         background.setLayout(new GridBagLayout());
 
         JTextArea textArea=new JTextArea("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam imperdiet blandit neque non malesuada. Aenean accumsan vel odio id tincidunt. Sed at finibus lorem, in vestibulum neque.Donec tristique sem nec felis tincidunt scelerisque.Sed lacus nulla, venenatis vel erat non, cursus dictum turpis. Nam in augue ac augue commodo malesuada at id eros. Aenean euismod, dui ac mollis scelerisque, neque justo fringilla mi, non pellentesque purus nulla ut nulla. Curabitur a ligula eget eros imperdiet aliquet vel at felis. Proin sed varius lorem. Fusce eu sapien dui. Pellentesque et vulputate augue. Proin vehicula faucibus risus sit amet iaculis. Ut id ultricies odio."+
@@ -70,7 +69,7 @@ public class Help {
         panel.setPreferredSize(new Dimension(620,510));
 
         homeButton.addActionListener(e -> {
-            new MainMenu();
+            new MainMenu(gameSystem);
             frame.dispose();
         });
 

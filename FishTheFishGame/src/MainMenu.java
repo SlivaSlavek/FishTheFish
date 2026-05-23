@@ -6,7 +6,9 @@ import java.io.IOException;
 
 public class MainMenu {
     private JFrame frame;
-    public MainMenu() {
+    private GameSystem gameSystem;
+    public MainMenu(GameSystem gameS) {
+        gameSystem=gameS;
         frame=new JFrame("Fish The Fish - Main menu");
         init();
     }
@@ -21,11 +23,7 @@ public class MainMenu {
         frame.setBackground(new Color(10, 73, 149));
 
         JLabel background;
-        try {
-            background=new JLabel(new ImageIcon(ImageIO.read(new File("FishTheFishGame/Resources/docasnePozadi1.png"))));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        background = new JLabel(new ImageIcon(getClass().getResource("docasnePozadi1.png")));
         background.setLayout(new GridBagLayout());
 
 
@@ -70,7 +68,7 @@ public class MainMenu {
         buttonPlay.setFocusPainted(false);
         panel.add(buttonPlay);
         buttonPlay.addActionListener(e -> {
-            new Game();
+            new Game(gameSystem);
             frame.dispose();
         });
 
@@ -84,7 +82,7 @@ public class MainMenu {
         buttonFishIndex.setFocusPainted(false);
         panel.add(buttonFishIndex);
         buttonFishIndex.addActionListener(e -> {
-            new Index();
+            new Index(gameSystem);
             frame.dispose();
         });
 
@@ -98,7 +96,7 @@ public class MainMenu {
         buttonHelp.setFocusPainted(false);
         panel.add(buttonHelp);
         buttonHelp.addActionListener(e -> {
-            new Help();
+            new Help(gameSystem);
             frame.dispose();
         });
 

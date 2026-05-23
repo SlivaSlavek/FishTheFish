@@ -6,7 +6,9 @@ import java.io.IOException;
 
 public class Game {
     private JFrame frame;
-    public Game() {
+    private GameSystem gameSystem;
+    public Game(GameSystem gameS) {
+        gameSystem=gameS;
         frame=new JFrame("Fish The Fish");
         init();
     }
@@ -20,11 +22,12 @@ public class Game {
         frame.setBackground(new Color(10, 73, 149));
 
         JLabel background;
-        try {
-            background=new JLabel(new ImageIcon(ImageIO.read(new File("FishTheFishGame/Resources/docasnePozadi1.png"))));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        background = new JLabel(new ImageIcon(getClass().getResource("docasnePozadi1.png")));
+        //try {
+        //    background=new JLabel(new ImageIcon(ImageIO.read(new File("FishTheFishGame/Resources/docasnePozadi1.png"))));
+        //} catch (IOException e) {
+        //    throw new RuntimeException(e);
+        //}
         background.setLayout(new GridBagLayout());
 
 
