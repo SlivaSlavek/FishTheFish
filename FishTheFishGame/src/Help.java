@@ -51,10 +51,6 @@ public class Help {
         textArea.setLineWrap(true);
         textArea.setWrapStyleWord(true);
         JPanel panel=new JPanel(new BorderLayout());
-        JPanel left=new JPanel();
-        JPanel right=new JPanel();
-        left.setPreferredSize(new Dimension(25,500));
-        right.setPreferredSize(new Dimension(25,500));
         JPanel panelRight=new JPanel(new BorderLayout());
         JButton homeButton=new JButton(homeLogo);
         homeButton.setPreferredSize(new Dimension(75,75));

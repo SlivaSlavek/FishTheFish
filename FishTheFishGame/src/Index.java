@@ -1,6 +1,7 @@
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
@@ -14,6 +15,7 @@ public class Index {
         init();
     }
     public void init(){
+        int toGet=0;
         Icon homeLogo = new ImageIcon(getClass().getResource("HomeIcon.png"));
         Dimension okraje=new Dimension(70,600);
         frame.setSize(okraje.width*10,okraje.height);
@@ -27,43 +29,65 @@ public class Index {
         background = new JLabel(new ImageIcon(getClass().getResource("docasnePozadi1.png")));
         background.setLayout(new GridBagLayout());
 
-        JTextArea textArea=new JTextArea("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam imperdiet blandit neque non malesuada. Aenean accumsan vel odio id tincidunt. Sed at finibus lorem, in vestibulum neque.Donec tristique sem nec felis tincidunt scelerisque.Sed lacus nulla, venenatis vel erat non, cursus dictum turpis. Nam in augue ac augue commodo malesuada at id eros. Aenean euismod, dui ac mollis scelerisque, neque justo fringilla mi, non pellentesque purus nulla ut nulla. Curabitur a ligula eget eros imperdiet aliquet vel at felis. Proin sed varius lorem. Fusce eu sapien dui. Pellentesque et vulputate augue. Proin vehicula faucibus risus sit amet iaculis. Ut id ultricies odio."+
 
-                "Suspendisse hendrerit aliquam eros.Fusce tristique diam neque, et tristique tellus viverra non. Aliquam auctor, leo at elementum pharetra, orci ex placerat dui, at pretium nulla diam sed sem. Nulla velit neque, porta a malesuada eu, hendrerit non lacus. Mauris id leo risus. Nam in massa convallis, volutpat purus maximus, eleifend nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae;" +
+        JPanel indexPanel=new JPanel();
+        indexPanel.setLayout(new BoxLayout(indexPanel,BoxLayout.Y_AXIS));
+        for (int i=0;i<gameSystem.getFishCollection().size();i++){
+            JPanel fishPanel = new JPanel(new BorderLayout());
+            if (gameSystem.getFishCollection().get(i).isInIndex()) {
+                fishPanel.setPreferredSize(new Dimension(200, 250));
+                JPanel textPanel = new JPanel(new BorderLayout());
+                JLabel name = new JLabel(gameSystem.getFishCollection().get(i).getName());
+                name.setFont(new Font("Comic Sans MS", Font.BOLD, 25));
+                JLabel valueLabel = new JLabel("VALUE: " + gameSystem.getFishCollection().get(i).getValue() + "  (" + gameSystem.getFishCollection().get(i).getRarity() + ")");
+                valueLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
+                textPanel.add(valueLabel, BorderLayout.SOUTH);
+                textPanel.add(name, BorderLayout.CENTER);
+                textPanel.setBackground(new Color(0, 0, 0, 0));
+                fishPanel.add(textPanel, BorderLayout.SOUTH);
+                switch (gameSystem.getFishCollection().get(i).getRarity()) {
+                    case COMMON -> fishPanel.setBackground(new Color(166, 225, 255));
+                    case UNCOMMON -> fishPanel.setBackground(new Color(0, 201, 255));
+                    case RARE -> fishPanel.setBackground(new Color(55, 255, 41));
+                    case EPIC -> fishPanel.setBackground(new Color(170, 75, 255));
+                    case LEGENDARY -> fishPanel.setBackground(new Color(255, 242, 11));
+                    case null, default -> fishPanel.setBackground(new Color(89, 89, 89));
+                }
+                fishPanel.add(new JLabel(gameSystem.getFishCollection().get(i).getImage()), BorderLayout.CENTER);
+                indexPanel.add(fishPanel);
+            } else{
+                fishPanel.setPreferredSize(new Dimension(200, 250));
+                JPanel textPanel = new JPanel(new BorderLayout());
+                JLabel name = new JLabel("UNKNOWN");
+                name.setFont(new Font("Comic Sans MS", Font.BOLD, 25));
+                JLabel valueLabel = new JLabel("VALUE: UNKNOWN  (UNKNOWN)");
+                valueLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
+                textPanel.add(valueLabel, BorderLayout.SOUTH);
+                textPanel.add(name, BorderLayout.CENTER);
+                textPanel.setBackground(new Color(0, 0, 0, 0));
+                fishPanel.add(textPanel, BorderLayout.SOUTH);
+                fishPanel.add(new JLabel(new ImageIcon(getClass().getResource("UnknownFih.png"))), BorderLayout.CENTER);
+                toGet++;
+                indexPanel.add(fishPanel);
+            }
+            fishPanel.setBorder(new LineBorder(new Color(0,0,0),2));
 
-                "Proin interdum justo eu ligula malesuada consequat.Sed in metus eros. Nulla malesuada vitae sem non finibus. Sed accumsan facilisis pretium. Nullam vel rhoncus lorem, vitae cursus sem. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nunc malesuada egestas ante eu varius. In aliquet neque rhoncus velit luctus, non pharetra metus imperdiet. Etiam vel aliquet mi. Ut hendrerit lacus accumsan felis pharetra pharetra. Aenean tincidunt elementum dolor ac dapibus. Phasellus et mauris id neque ullamcorper viverra. Duis mattis id nulla eu pellentesque." +
 
-                "Ut sollicitudin, erat eget euismod efficitur, nunc sapien mattis quam, et aliquet sapien odio id erat. Integer ac nisi erat. Cras gravida ut enim at cursus. In hac habitasse platea dictumst. Phasellus faucibus ante vel mauris varius tempus. Proin vel molestie felis, eu tincidunt mauris. Sed felis dolor, maximus ultricies eros faucibus, laoreet euismod nulla. Sed non tortor aliquam, hendrerit dui eget, maximus nibh. Ut sodales, odio vel ullamcorper ornare, elit justo ornare nibh, non aliquet lectus augue vel dolor. In maximus magna nec ex congue tincidunt. Quisque turpis mi, finibus vel massa a, posuere fermentum mauris." +
+        }
 
-                "Vestibulum aliquet, turpis vel scelerisque varius, nibh odio mattis ipsum, id fringilla sapien libero nec eros. Cras elementum, eros in consequat vehicula, sem nisi hendrerit turpis, nec volutpat eros lectus id sapien. Aliquam accumsan ipsum sit amet diam vehicula congue. Pellentesque porta mollis arcu, non dignissim lacus rutrum eu. Vestibulum congue pulvinar pharetra. Nulla facilisi. Aenean tincidunt convallis leo, ac consequat sapien semper ut. Nam vulputate velit eu rhoncus posuere. Vivamus ac iaculis tellus, quis eleifend elit."+
 
-                "Vestibulum pretium ut odio a sodales. Sed eu felis molestie, blandit tellus nec, vulputate purus. Proin laoreet, mauris at condimentum condimentum, lorem nibh tincidunt velit, id sollicitudin dui sapien id lectus. Phasellus dui felis, rutrum tristique faucibus id, aliquet at odio. Nullam aliquam aliquam lobortis. In sed justo non ligula porta aliquet. Fusce feugiat nulla arcu, dictum ornare urna molestie nec. Integer dignissim erat orci. Morbi rhoncus eleifend nisl, et rutrum neque vehicula congue." +
-
-                "In non dui egestas, lacinia ex in, vestibulum ante. Pellentesque fringilla suscipit luctus. Aenean posuere tristique erat vitae lacinia. Suspendisse potenti. Morbi varius vitae nulla et pulvinar. Morbi ac egestas sapien. Vivamus eu finibus diam, volutpat porta dui. Vivamus euismod enim non magna ullamcorper, sit amet hendrerit ligula facilisis. Morbi eu luctus nisl. Donec malesuada sed justo quis elementum. Curabitur congue maximus convallis."+
-
-                "Praesent ac leo justo. Morbi id augue nec orci imperdiet lobortis sed efficitur massa. Duis malesuada ut arcu sed blandit. Sed nulla mauris, eleifend sit amet odio at, blandit luctus nibh. Nam lacus arcu, pulvinar in facilisis non, vehicula non lacus. Nullam auctor in neque porttitor tempus. In dui nisl, euismod nec suscipit id, rhoncus et urna. Fusce libero purus, posuere at tempus sollicitudin, interdum luctus dui."+
-
-                "Vestibulum tincidunt enim sit amet odio semper molestie ut sed libero. Morbi eleifend blandit nisl eget porttitor. Nullam eleifend posuere urna, at condimentum felis. Integer vel viverra tortor, a scelerisque dui. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Curabitur eget elementum orci, nec sodales ipsum. Ut eget ex vestibulum, laoreet sapien nec, scelerisque est. Nam et est ex. Mauris at arcu dapibus, interdum tellus ut, lacinia eros. Proin viverra odio metus, quis condimentum erat ultrices a. Morbi eget pharetra ante. Aenean massa est, dictum in diam sit amet, bibendum iaculis mauris. Fusce dolor dolor, semper ac varius eget, dignissim eget diam." +
-
-                "Nunc molestie ornare neque eget volutpat. Cras vehicula lacus ipsum, eget hendrerit justo molestie sit amet. Nam a lectus nulla. Praesent tempor eu diam vitae scelerisque. Morbi nec efficitur nunc.");
-
-        textArea.setLineWrap(true);
-        textArea.setWrapStyleWord(true);
         JPanel panel=new JPanel(new BorderLayout());
-        JPanel left=new JPanel();
-        JPanel right=new JPanel();
-        left.setPreferredSize(new Dimension(25,500));
-        right.setPreferredSize(new Dimension(25,500));
         JPanel panelRight=new JPanel(new BorderLayout());
         JButton homeButton=new JButton(homeLogo);
         homeButton.setPreferredSize(new Dimension(75,75));
-        JScrollPane sp=new JScrollPane(textArea);
-        textArea.setBorder(new EmptyBorder(10,10,10,10));
-        //sp.add(textArea);
+        JScrollPane sp=new JScrollPane(indexPanel);
         sp.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        sp.createVerticalScrollBar();
+        sp.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
         panel.add(sp);
         panelRight.add(homeButton,BorderLayout.NORTH);
+        JLabel foundFromLabel=new JLabel((gameSystem.getFishCollection().size()-toGet)+"/"+gameSystem.getFishCollection().size());
+        foundFromLabel.setFont(new Font("Comic Sans MS",Font.BOLD,24));
+        panelRight.add(foundFromLabel);
         panel.add(panelRight,BorderLayout.EAST);
         panel.setPreferredSize(new Dimension(620,510));
 
