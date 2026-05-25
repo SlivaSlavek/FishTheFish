@@ -52,10 +52,10 @@ public class GameSystem {
         fishCollection.add(new Fish("Fish8",21,Rarity.RARE,fishIm8));
         fishCollection.add(new Fish("Fish9",25,Rarity.RARE,fishIm9));
         fishCollection.add(new Fish("Fish10",30,Rarity.RARE,fishIm10));
-        fishCollection.add(new Fish("Fish11",75,Rarity.EPIC,fishIm10));
-        fishCollection.add(new Fish("Fish12",80,Rarity.EPIC,fishIm10));
-        fishCollection.add(new Fish("Fish13",150,Rarity.LEGENDARY,fishIm10));
-        fishCollection.add(new Fish("Fish14",200,Rarity.LEGENDARY,fishIm10));
+        fishCollection.add(new Fish("Fish11",75,Rarity.EPIC,fishIm11));
+        fishCollection.add(new Fish("Fish12",80,Rarity.EPIC,fishIm12));
+        fishCollection.add(new Fish("Fish13",150,Rarity.LEGENDARY,fishIm13));
+        fishCollection.add(new Fish("Fish14",200,Rarity.LEGENDARY,fishIm14));
 
         //fishCollection.get(5).setInIndex(true);
         //fishCollection.get(12).setInIndex(true);
