@@ -36,6 +36,7 @@ public class Game {
             FishPanel fishPanel=new FishPanel(new JPanel());
             //JPanel fishPanel=new JPanel();
             fishPanel.getPanel().setBackground(new Color(0,0,0,0));
+            fishPanel.getPanel().setPreferredSize(new Dimension(150,150));
             //JButton fishButton=new JButton("TEST");
             //fishButton.setBackground(new Color(0,0,0, 0));
             //fishButton.setBorder(new LineBorder(new Color(0,0,0),1));
