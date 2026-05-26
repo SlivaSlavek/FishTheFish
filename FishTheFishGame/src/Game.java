@@ -36,6 +36,7 @@ public class Game {
             FishPanel fishPanel=new FishPanel(new JPanel());
             //JPanel fishPanel=new JPanel();
             fishPanel.getPanel().setBackground(new Color(0,0,0,0));
+            fishPanel.getPanel().setOpaque(false);
             fishPanel.getPanel().setPreferredSize(new Dimension(150,150));
             //JButton fishButton=new JButton("TEST");
             //fishButton.setBackground(new Color(0,0,0, 0));
@@ -102,19 +103,26 @@ public class Game {
 
     private void spawnFish(){
         Random random = new Random();
-        if (fishPlaces[random.nextInt(30)].getFish()==null){
+        int which=random.nextInt(30);
+        if (fishPlaces[which].getFish()==null){
+            System.out.println("vybral se panel " + which);
             int numm=random.nextInt(51);
             if (numm>=49){
-
+                fishPlaces[which].addFish(legendaries.get(random.nextInt(legendaries.size())),gameSystem);
             } else if (numm>44) {
-                
+                fishPlaces[which].addFish(epics.get(random.nextInt(epics.size())),gameSystem);
             } else if (numm>34) {
-                
+                fishPlaces[which].addFish(rares.get(random.nextInt(rares.size())),gameSystem);
             } else if (numm>20) {
-                
+                fishPlaces[which].addFish(uncommons.get(random.nextInt(uncommons.size())),gameSystem);
             } else{
-
+                fishPlaces[which].addFish(commons.get(random.nextInt(commons.size())),gameSystem);
             }
+            Timer despawnTimer=new Timer(randomSecs(2000,7000),e -> {
+               fishPlaces[which].despawnFish();
+            });
+            despawnTimer.setRepeats(false);
+            despawnTimer.start();
         }
 
     }

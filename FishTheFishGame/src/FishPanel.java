@@ -1,4 +1,5 @@
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 
 public class FishPanel {
@@ -26,33 +27,49 @@ public class FishPanel {
     }
 
     public void addFish(Fish fishAdded, GameSystem game){
+        final boolean[] alreadyCatched = {false};
         fish=fishAdded;
         JButton button = new JButton(fishAdded.getImage());
-        button.setBackground(new Color(0,0,0,0));
+        button.setOpaque(false);
+        button.setContentAreaFilled(false);
+        button.setPreferredSize(new Dimension(150,150));
+        button.setBorderPainted(false);
+        button.setFocusPainted(false);
+        button.setBorder(new LineBorder(new Color(1,1,1),1));
         panel.add(button);
-
+        panel.revalidate();
+        panel.repaint();
 
 
         button.addActionListener(e -> {
-            Icon catched = new ImageIcon(getClass().getResource("catched.png"));
-            button.add(new JLabel(catched));
-            if (!fish.isInIndex()){
-                for (Fish fishes : game.getFishCollection()) {
-                    if (fishes.equals(fish)) {
-                        fishes.setInIndex(true);
+            if (!alreadyCatched[0]){
+                alreadyCatched[0] =true;
+                Icon catched = new ImageIcon(getClass().getResource("catched.png"));
+                button.setIcon(catched);
+                button.setBorder(new LineBorder(new Color(1,1,1),1));
+                if (!fishAdded.isInIndex()){
+
+                    for (Fish fishes : game.getFishCollection()) {
+                        if (fishes.equals(fish)) {
+                            fishes.setInIndex(true);
+                        }
                     }
                 }
+                game.setScore(game.getScore()+fishAdded.getValue());
+                Timer catchedTimer = new Timer(1000,e1 -> {
+                    despawnFish();
+                });
+                catchedTimer.setRepeats(false);
+                catchedTimer.start();
             }
-            game.setScore(game.getScore()+fishAdded.getValue());
-            Timer catchedTimer = new Timer(1000,e1 -> {
-                JPanel newPanel = new JPanel();
-                newPanel.setBackground(new Color(0,0,0,0));
-                newPanel.setPreferredSize(new Dimension(150,150));
-                panel=newPanel;
-                fish=null;
-            });
-            catchedTimer.setRepeats(false);
-            catchedTimer.start();
         });
+    }
+
+    public void despawnFish(){
+        panel.removeAll();
+        panel.revalidate();
+        panel.setPreferredSize(new Dimension(150,150));
+        panel.repaint();
+        fish = null;
     }
 }
