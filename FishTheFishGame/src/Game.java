@@ -1,16 +1,18 @@
-import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.swing.border.LineBorder;
 import java.awt.*;
-import java.io.File;
-import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Random;
-import java.util.concurrent.TimeUnit;
 
 public class Game {
     private JFrame frame;
     private GameSystem gameSystem;
-    boolean running=true;
+    private boolean running=true;
+    private FishPanel[] fishPlaces = new FishPanel[30];
+    ArrayList<Fish>commons=new ArrayList<>();
+    ArrayList<Fish>uncommons=new ArrayList<>();
+    ArrayList<Fish>rares=new ArrayList<>();
+    ArrayList<Fish>epics=new ArrayList<>();
+    ArrayList<Fish>legendaries=new ArrayList<>();
     public Game(GameSystem gameS) {
         gameSystem=gameS;
         frame=new JFrame("Fish The Fish");
@@ -30,10 +32,10 @@ public class Game {
         background.setLayout(new BorderLayout());
         JLabel game=new JLabel(new ImageIcon(getClass().getResource("GameBackground2.png")));
         game.setLayout(new GridLayout(5,6));
-        JPanel[] fishPlaces = new JPanel[30];
         for (int i=0;i< fishPlaces.length;i++){
-            JPanel fishPanel=new JPanel();
-            fishPanel.setBackground(new Color(0,0,0,0));
+            FishPanel fishPanel=new FishPanel(new JPanel());
+            //JPanel fishPanel=new JPanel();
+            fishPanel.getPanel().setBackground(new Color(0,0,0,0));
             //JButton fishButton=new JButton("TEST");
             //fishButton.setBackground(new Color(0,0,0, 0));
             //fishButton.setBorder(new LineBorder(new Color(0,0,0),1));
@@ -41,7 +43,7 @@ public class Game {
             //fishButton.setFocusPainted(false);
             //fishPanel.add(fishButton);
             fishPlaces[i]=fishPanel;
-            game.add(fishPlaces[i]);
+            game.add(fishPlaces[i].getPanel());
         }
 
 
@@ -62,6 +64,17 @@ public class Game {
         frame.setVisible(true);
 
 
+        for (Fish fish : gameSystem.getFishCollection()){
+            switch (fish.getRarity()){
+                case COMMON -> commons.add(fish);
+                case UNCOMMON -> uncommons.add(fish);
+                case RARE -> rares.add(fish);
+                case EPIC -> epics.add(fish);
+                case LEGENDARY -> legendaries.add(fish);
+            }
+        }
+
+
         loop();
 
 
@@ -73,16 +86,36 @@ public class Game {
                 ((Timer)e.getSource()).stop();
                 return;
             }
-            spawnFish();});
+            fishSpawner();});
         gameLoop.start();
     }
 
-    private void spawnFish(){
+    private void fishSpawner(){
         Timer spawnTimer=new Timer(randomSecs(1000,5000), e->{
             System.out.println(randomSecs(1,10000));
+            spawnFish();
         });
         spawnTimer.setRepeats(false);
         spawnTimer.start();
+    }
+
+    private void spawnFish(){
+        Random random = new Random();
+        if (fishPlaces[random.nextInt(30)].getFish()==null){
+            int numm=random.nextInt(51);
+            if (numm>=49){
+
+            } else if (numm>44) {
+                
+            } else if (numm>34) {
+                
+            } else if (numm>20) {
+                
+            } else{
+
+            }
+        }
+
     }
 
 
