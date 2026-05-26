@@ -4,6 +4,7 @@ import java.util.ArrayList;
 public class GameSystem {
     private int score;
     private ArrayList<Fish> fishCollection=new ArrayList<>();
+    private String lastPlus = "";
 
     public GameSystem() {
     }
@@ -18,6 +19,14 @@ public class GameSystem {
 
     public ArrayList<Fish> getFishCollection() {
         return fishCollection;
+    }
+
+    public String getLastPlus() {
+        return lastPlus;
+    }
+
+    public void setLastPlus(String lastPlus) {
+        this.lastPlus = lastPlus;
     }
 
     public void setFishCollection(ArrayList<Fish> fishCollection) {

@@ -44,6 +44,7 @@ public class FishPanel {
         button.addActionListener(e -> {
             if (!alreadyCatched[0]){
                 alreadyCatched[0] =true;
+                game.setLastPlus(fishAdded.getValue() + "");
                 Icon catched = new ImageIcon(getClass().getResource("catched.png"));
                 button.setIcon(catched);
                 button.setBorder(new LineBorder(new Color(1,1,1),1));
@@ -58,6 +59,7 @@ public class FishPanel {
                 game.setScore(game.getScore()+fishAdded.getValue());
                 Timer catchedTimer = new Timer(1000,e1 -> {
                     despawnFish();
+                    game.setLastPlus(null);
                 });
                 catchedTimer.setRepeats(false);
                 catchedTimer.start();

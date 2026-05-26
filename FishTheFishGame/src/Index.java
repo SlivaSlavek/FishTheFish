@@ -29,7 +29,6 @@ public class Index {
         background = new JLabel(new ImageIcon(getClass().getResource("docasnePozadi1.png")));
         background.setLayout(new GridBagLayout());
 
-
         JPanel indexPanel=new JPanel();
         indexPanel.setLayout(new BoxLayout(indexPanel,BoxLayout.Y_AXIS));
         for (int i=0;i<gameSystem.getFishCollection().size();i++){

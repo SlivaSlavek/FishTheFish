@@ -8,11 +8,14 @@ public class Game {
     private GameSystem gameSystem;
     private boolean running=true;
     private FishPanel[] fishPlaces = new FishPanel[30];
-    ArrayList<Fish>commons=new ArrayList<>();
-    ArrayList<Fish>uncommons=new ArrayList<>();
-    ArrayList<Fish>rares=new ArrayList<>();
-    ArrayList<Fish>epics=new ArrayList<>();
-    ArrayList<Fish>legendaries=new ArrayList<>();
+    private int pointsNumSize=23;
+    private ArrayList<Fish>commons=new ArrayList<>();
+    private ArrayList<Fish>uncommons=new ArrayList<>();
+    private ArrayList<Fish>rares=new ArrayList<>();
+    private ArrayList<Fish>epics=new ArrayList<>();
+    private ArrayList<Fish>legendaries=new ArrayList<>();
+    private JLabel pointsCount=new JLabel();
+    private JLabel pointsPlus=new JLabel("0");
     public Game(GameSystem gameS) {
         gameSystem=gameS;
         frame=new JFrame("Fish The Fish");
@@ -48,6 +51,23 @@ public class Game {
             game.add(fishPlaces[i].getPanel());
         }
 
+        if (gameSystem.getScore()>99999){
+            pointsNumSize=10;
+        }
+
+        JPanel pointsPanel=new JPanel(new GridLayout(5,1));
+        pointsPanel.setPreferredSize(new Dimension(75,200));
+
+        JLabel pointsText=new JLabel("Score:");
+        pointsText.setFont(new Font("Comic Sans MS",Font.BOLD,23));
+        pointsCount.setFont(new Font("Comic Sans MS",Font.PLAIN,pointsNumSize));
+        pointsPlus.setFont(new Font("Comic Sans MS",Font.ITALIC,23));
+
+
+        pointsPanel.add(pointsText);
+        pointsPanel.add(pointsCount);
+        pointsPanel.add(pointsPlus);
+
 
 
         JButton homeButton=new JButton(homeLogo);
@@ -59,6 +79,7 @@ public class Game {
         });
         JPanel panelRight=new JPanel(new BorderLayout());
         panelRight.add(homeButton,BorderLayout.NORTH);
+        panelRight.add(pointsPanel, BorderLayout.SOUTH);
         background.add(panelRight,BorderLayout.EAST);
         background.add(game);
         frame.add(background);
@@ -90,11 +111,31 @@ public class Game {
             }
             fishSpawner();});
         gameLoop.start();
+
+        Timer uiPlusTimer = new Timer(500, e -> {
+
+            pointsCount.setText(
+                    "" + gameSystem.getScore()
+            );
+
+            if (gameSystem.getLastPlus() == null){
+                pointsPlus.setText("");
+            } else {
+                pointsPlus.setText(
+                        "+" + gameSystem.getLastPlus()
+                );
+            }
+
+        });
+
+        uiPlusTimer.start();
     }
 
     private void fishSpawner(){
         Timer spawnTimer=new Timer(randomSecs(1000,5000), e->{
             System.out.println(randomSecs(1,10000));
+            //pointsPlus.setText("+" + gameSystem.getLastPlus());
+            //pointsCount.setText(""+gameSystem.getScore());
             spawnFish();
         });
         spawnTimer.setRepeats(false);
