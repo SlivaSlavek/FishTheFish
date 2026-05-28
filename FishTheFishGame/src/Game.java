@@ -104,7 +104,7 @@ public class Game {
     }
 
     private void loop(){
-        Timer gameLoop = new Timer(4000, e -> {
+        Timer gameLoop = new Timer(2000, e -> {
             if (!running){
                 ((Timer)e.getSource()).stop();
                 return;
@@ -112,7 +112,7 @@ public class Game {
             fishSpawner();});
         gameLoop.start();
 
-        Timer uiPlusTimer = new Timer(500, e -> {
+        Timer uiPlusTimer = new Timer(200, e -> {
 
             pointsCount.setText(
                     "" + gameSystem.getScore()
@@ -159,7 +159,7 @@ public class Game {
             } else{
                 fishPlaces[which].addFish(commons.get(random.nextInt(commons.size())),gameSystem);
             }
-            Timer despawnTimer=new Timer(randomSecs(2000,7000),e -> {
+            Timer despawnTimer=new Timer(randomSecs(500,4000),e -> {
                fishPlaces[which].despawnFish();
             });
             despawnTimer.setRepeats(false);
