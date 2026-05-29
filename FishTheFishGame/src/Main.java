@@ -6,6 +6,5 @@ public class Main {
     }
 
 
-
     // Poznamka:   Na hru GridLayout
 }

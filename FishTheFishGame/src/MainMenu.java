@@ -13,6 +13,8 @@ public class MainMenu {
         init();
     }
     public void init(){
+        ImageIcon logo = new ImageIcon(getClass().getResource("FTF_logo.png"));
+        frame.setIconImage(logo.getImage());
         Dimension okraje=new Dimension(70,600);
         frame.setSize(okraje.width*10,okraje.height);
         frame.setPreferredSize(new Dimension(okraje.width*10, okraje.height));

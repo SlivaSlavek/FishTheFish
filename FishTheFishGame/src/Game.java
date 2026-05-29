@@ -22,6 +22,8 @@ public class Game {
         init();
     }
     public void init(){
+        ImageIcon logo = new ImageIcon(getClass().getResource("FTF_logo.png"));
+        frame.setIconImage(logo.getImage());
         Dimension okraje=new Dimension(111,825);
         frame.setSize(okraje.width*10,okraje.height);
         frame.setPreferredSize(new Dimension(okraje.width*10, okraje.height));
@@ -80,6 +82,7 @@ public class Game {
         JPanel panelRight=new JPanel(new BorderLayout());
         panelRight.add(homeButton,BorderLayout.NORTH);
         panelRight.add(pointsPanel, BorderLayout.SOUTH);
+        panelRight.add(new JLabel(logo), BorderLayout.CENTER);
         background.add(panelRight,BorderLayout.EAST);
         background.add(game);
         frame.add(background);

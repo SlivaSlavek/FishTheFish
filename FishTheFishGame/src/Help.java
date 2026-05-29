@@ -14,6 +14,8 @@ public class Help {
         init();
     }
     public void init(){
+        ImageIcon logo = new ImageIcon(getClass().getResource("FTF_logo.png"));
+        frame.setIconImage(logo.getImage());
         Icon homeLogo = new ImageIcon(getClass().getResource("HomeIcon.png"));
         //Icon homeLogo = new ImageIcon("FishTheFishGame/Resources/HomeIcon.png");
         Dimension okraje=new Dimension(70,600);
@@ -61,6 +63,7 @@ public class Help {
         sp.createVerticalScrollBar();
         panel.add(sp);
         panelRight.add(homeButton,BorderLayout.NORTH);
+        panelRight.add(new JLabel(logo), BorderLayout.CENTER);
         panel.add(panelRight,BorderLayout.EAST);
         panel.setPreferredSize(new Dimension(620,510));
 

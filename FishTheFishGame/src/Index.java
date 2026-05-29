@@ -15,6 +15,8 @@ public class Index {
         init();
     }
     public void init(){
+        ImageIcon logo = new ImageIcon(getClass().getResource("FTF_logo.png"));
+        frame.setIconImage(logo.getImage());
         int toGet=0;
         Icon homeLogo = new ImageIcon(getClass().getResource("HomeIcon.png"));
         Dimension okraje=new Dimension(70,600);
@@ -87,6 +89,7 @@ public class Index {
         JLabel foundFromLabel=new JLabel((gameSystem.getFishCollection().size()-toGet)+"/"+gameSystem.getFishCollection().size());
         foundFromLabel.setFont(new Font("Comic Sans MS",Font.BOLD,24));
         panelRight.add(foundFromLabel);
+        panelRight.add(new JLabel(logo), BorderLayout.SOUTH);
         panel.add(panelRight,BorderLayout.EAST);
         panel.setPreferredSize(new Dimension(620,510));
 
