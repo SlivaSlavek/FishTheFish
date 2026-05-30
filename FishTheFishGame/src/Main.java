@@ -5,6 +5,4 @@ public class Main {
         MainMenu mmenu = new MainMenu(gameSystem);
     }
 
-
-    // Poznamka:   Na hru GridLayout
 }

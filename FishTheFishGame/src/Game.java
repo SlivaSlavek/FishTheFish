@@ -41,16 +41,9 @@ public class Game {
         game.setLayout(new GridLayout(5,6));
         for (int i=0;i< fishPlaces.length;i++){
             FishPanel fishPanel=new FishPanel(new JPanel());
-            //JPanel fishPanel=new JPanel();
             fishPanel.getPanel().setBackground(new Color(0,0,0,0));
             fishPanel.getPanel().setOpaque(false);
             fishPanel.getPanel().setPreferredSize(new Dimension(150,150));
-            //JButton fishButton=new JButton("TEST");
-            //fishButton.setBackground(new Color(0,0,0, 0));
-            //fishButton.setBorder(new LineBorder(new Color(0,0,0),1));
-            //fishButton.setBorderPainted(false);
-            //fishButton.setFocusPainted(false);
-            //fishPanel.add(fishButton);
             fishPlaces[i]=fishPanel;
             game.add(fishPlaces[i].getPanel());
         }
@@ -143,9 +136,6 @@ public class Game {
 
     private void fishSpawner(){
         Timer spawnTimer=new Timer(randomSecs(1000,5000), e->{
-            System.out.println(randomSecs(1,10000));
-            //pointsPlus.setText("+" + gameSystem.getLastPlus());
-            //pointsCount.setText(""+gameSystem.getScore());
             spawnFish();
         });
         spawnTimer.setRepeats(false);

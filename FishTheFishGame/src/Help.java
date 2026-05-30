@@ -17,7 +17,6 @@ public class Help {
         ImageIcon logo = new ImageIcon(getClass().getResource("FTF_logo.png"));
         frame.setIconImage(logo.getImage());
         Icon homeLogo = new ImageIcon(getClass().getResource("HomeIcon.png"));
-        //Icon homeLogo = new ImageIcon("FishTheFishGame/Resources/HomeIcon.png");
         Dimension okraje=new Dimension(70,600);
         frame.setSize(okraje.width*10,okraje.height);
         frame.setPreferredSize(new Dimension(okraje.width*10, okraje.height));
@@ -48,7 +47,6 @@ public class Help {
         homeButton.setPreferredSize(new Dimension(75,75));
         JScrollPane sp=new JScrollPane(textArea);
         textArea.setBorder(new EmptyBorder(10,10,10,10));
-        //sp.add(textArea);
         sp.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         sp.createVerticalScrollBar();
         panel.add(sp);

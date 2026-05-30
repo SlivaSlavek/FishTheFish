@@ -76,10 +76,5 @@ public class GameSystem {
         fishCollection.add(new Fish("Clown Clown Fish",150,Rarity.LEGENDARY,fishIm13));
         fishCollection.add(new Fish("Tralalero Tralala",200,Rarity.LEGENDARY,fishIm14));
         fishCollection.add(new Fish("Cat Fih",250,Rarity.LEGENDARY,fishIm15));
-
-        //fishCollection.get(5).setInIndex(true);
-        //fishCollection.get(12).setInIndex(true);
-        //fishCollection.get(8).setInIndex(true);
-
     }
 }
