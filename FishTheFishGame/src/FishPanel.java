@@ -14,10 +14,6 @@ public class FishPanel {
         return panel;
     }
 
-    public void setPanel(JPanel panel) {
-        this.panel = panel;
-    }
-
     public Fish getFish() {
         return fish;
     }

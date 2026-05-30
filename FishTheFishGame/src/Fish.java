@@ -1,6 +1,7 @@
 import javax.swing.*;
+import java.io.Serializable;
 
-public class Fish {
+public class Fish implements Serializable {
     private String name;
     private int value;
     private Rarity rarity;
@@ -18,10 +19,6 @@ public class Fish {
 
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public Rarity getRarity() {
@@ -50,9 +47,5 @@ public class Fish {
 
     public int getValue() {
         return value;
-    }
-
-    public void setValue(int value) {
-        this.value = value;
     }
 }

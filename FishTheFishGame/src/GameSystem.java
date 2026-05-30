@@ -1,10 +1,21 @@
 import javax.swing.*;
+import java.io.*;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 
-public class GameSystem {
+public class GameSystem implements Serializable {
     private int score;
     private ArrayList<Fish> fishCollection=new ArrayList<>();
     private String lastPlus = "";
+
+    public File savingFile(){
+        try {
+            File location=new File(GameSystem.class.getProtectionDomain().getCodeSource().getLocation().toURI());
+            return new File(location.getParentFile(),"save.ftf");
+        } catch (URISyntaxException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     public GameSystem() {
     }
@@ -29,9 +40,27 @@ public class GameSystem {
         this.lastPlus = lastPlus;
     }
 
-    public void setFishCollection(ArrayList<Fish> fishCollection) {
-        this.fishCollection = fishCollection;
+
+    public void save() throws IOException {
+        FileOutputStream fos=new FileOutputStream(savingFile());
+        ObjectOutputStream oos = new ObjectOutputStream(fos);
+        oos.writeObject(this);
+        oos.close();
+        fos.close();
     }
+
+
+
+    public static GameSystem load() throws IOException, ClassNotFoundException {
+        FileInputStream fis=new FileInputStream(new GameSystem().savingFile());
+        ObjectInputStream ois=new ObjectInputStream(fis);
+        GameSystem loadingSystem= (GameSystem) ois.readObject();
+        ois.close();
+        fis.close();
+        return loadingSystem;
+    }
+
+
 
     public void init(){
         score=0;

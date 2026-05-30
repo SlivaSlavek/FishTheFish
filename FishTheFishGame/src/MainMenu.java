@@ -1,7 +1,5 @@
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.io.File;
 import java.io.IOException;
 
 public class MainMenu {
@@ -106,10 +104,13 @@ public class MainMenu {
         buttonSaveAQuit.setFocusPainted(false);
         panel.add(buttonSaveAQuit);
         buttonSaveAQuit.addActionListener(e -> {
-
-
-
             frame.dispose();
+            try {
+                gameSystem.save();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+            System.exit(0);
         });
 
 
