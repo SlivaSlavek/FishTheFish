@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Random;
 
 public class Game {
@@ -14,6 +15,7 @@ public class Game {
     private ArrayList<Fish>rares=new ArrayList<>();
     private ArrayList<Fish>epics=new ArrayList<>();
     private ArrayList<Fish>legendaries=new ArrayList<>();
+    private ArrayList<Fish>miscatches=new ArrayList<>();
     private JLabel pointsCount=new JLabel();
     private JLabel pointsPlus=new JLabel("0");
     public Game(GameSystem gameS) {
@@ -97,6 +99,7 @@ public class Game {
                 case RARE -> rares.add(fish);
                 case EPIC -> epics.add(fish);
                 case LEGENDARY -> legendaries.add(fish);
+                case MISCATCH -> miscatches.add(fish);
             }
         }
 
@@ -124,9 +127,13 @@ public class Game {
             if (gameSystem.getLastPlus() == null){
                 pointsPlus.setText("");
             } else {
-                pointsPlus.setText(
-                        "+" + gameSystem.getLastPlus()
-                );
+                if (gameSystem.getLastPlus().contains("-")){
+                    pointsPlus.setForeground(new Color(255, 0, 0));
+                    pointsPlus.setText(gameSystem.getLastPlus());
+                } else {
+                    pointsPlus.setForeground(new Color(0, 0, 0));
+                    pointsPlus.setText("+" + gameSystem.getLastPlus());
+                }
             }
 
         });
@@ -148,10 +155,12 @@ public class Game {
     private void spawnFish(){
         Random random = new Random();
         int which=random.nextInt(30);
-        if (fishPlaces[which].getFish()==null){
+        if (fishPlaces[which].getFish()==null) {
             System.out.println("vybral se panel " + which);
-            int numm=random.nextInt(51);
-            if (numm>=49){
+            int numm = random.nextInt(61);
+            if (numm>50){
+                fishPlaces[which].addFish(miscatches.get(random.nextInt(miscatches.size())),gameSystem);
+            }else if (numm>=49){
                 fishPlaces[which].addFish(legendaries.get(random.nextInt(legendaries.size())),gameSystem);
             } else if (numm>44) {
                 fishPlaces[which].addFish(epics.get(random.nextInt(epics.size())),gameSystem);

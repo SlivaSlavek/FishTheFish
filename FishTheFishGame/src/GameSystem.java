@@ -52,6 +52,15 @@ public class GameSystem {
         ImageIcon fishIm15=new ImageIcon(getClass().getResource("fish15.png"));
 
 
+
+        ImageIcon miscatch1=new ImageIcon(getClass().getResource("fishDead.png"));
+        ImageIcon miscatch2=new ImageIcon(getClass().getResource("mine.png"));
+
+
+
+
+        fishCollection.add(new Fish("Dead fish",-10,Rarity.MISCATCH,miscatch1));
+        fishCollection.add(new Fish("Mine",-45,Rarity.MISCATCH,miscatch2));
         fishCollection.add(new Fish("Green Sunfish",5,Rarity.COMMON,fishIm1));
         fishCollection.add(new Fish("Squarespot Anthias",7,Rarity.COMMON,fishIm2));
         fishCollection.add(new Fish("Pink Widow Tetra",8,Rarity.COMMON,fishIm7));
