@@ -146,7 +146,6 @@ public class Game {
         Random random = new Random();
         int which=random.nextInt(30);
         if (fishPlaces[which].getFish()==null) {
-            System.out.println("vybral se panel " + which);
             int numm = random.nextInt(61);
             if (numm>50){
                 fishPlaces[which].addFish(miscatches.get(random.nextInt(miscatches.size())),gameSystem);

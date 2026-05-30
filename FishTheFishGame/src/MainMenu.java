@@ -21,41 +21,18 @@ public class MainMenu {
         frame.setLocationRelativeTo(null);
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        //frame.setLayout(null);
         frame.setBackground(new Color(10, 73, 149));
 
         JLabel background;
         background = new JLabel(new ImageIcon(getClass().getResource("docasnePozadi1.png")));
         background.setLayout(new GridBagLayout());
 
-
-        /*
-        JPanel panel1=new JPanel();
-        panel1.setSize(new Dimension(okraje));
-        panel1.setPreferredSize(new Dimension(okraje));
-        JPanel panel2=new JPanel();
-        panel2.setSize(new Dimension(okraje));
-        panel2.setPreferredSize(new Dimension(okraje));
-        JPanel panel3=new JPanel();
-        panel3.setSize(new Dimension(okraje));
-        panel3.setPreferredSize(new Dimension(okraje.height*0+1, okraje.width/2));
-        JPanel panel4=new JPanel();
-        panel4.setSize(new Dimension(okraje));
-        panel4.setPreferredSize(new Dimension(okraje.height*0+1, okraje.width/2));
-        panel1.setBackground(new Color(10, 73, 149));
-        panel2.setBackground(new Color(10, 73, 149));
-        panel3.setBackground(new Color(10, 73, 149));
-        panel4.setBackground(new Color(10, 73, 149));
-
-         */
-
-
         JPanel panel=new JPanel();
-        panel.setLayout(new GridLayout(4,1,10,10));
-        //panel.setBounds(200,35,okraje.width*4,okraje.height/10*8);
+        panel.setLayout(new GridLayout(6,1,10,10));
         panel.setBackground(new Color(11, 32, 55,80));
+        panel.setPreferredSize(new Dimension(400,500));
 
-        JLabel menuText=new JLabel("   MAIN MENU");
+        JLabel menuText=new JLabel("       MAIN MENU");
         menuText.setFont(new Font("Comic Sans MS",Font.BOLD,32));
         menuText.setForeground(new Color(192, 205, 255));
         panel.add(menuText);
@@ -102,16 +79,46 @@ public class MainMenu {
             frame.dispose();
         });
 
+        JButton buttonRestart=new JButton("RESTART PROGRESS");
+        buttonRestart.setSize(okraje.width*4,100);
+        buttonRestart.setPreferredSize(new Dimension(okraje.width*4,100));
+        buttonRestart.setBackground(new Color(11, 32, 55));
+        buttonRestart.setFont(new Font("Comic Sans MS", Font.BOLD,30));
+        buttonRestart.setForeground(new Color(171, 184, 230));
+        buttonRestart.setBorderPainted(false);
+        buttonRestart.setFocusPainted(false);
+        panel.add(buttonRestart);
+        buttonRestart.addActionListener(e -> {
+            GameSystem gameSystem2 = new GameSystem();
+            gameSystem2.init();
+            new MainMenu(gameSystem2);
+            frame.dispose();
+        });
 
-        //frame.add(panel1, BorderLayout.WEST);
-        //frame.add(panel2,BorderLayout.EAST);
-        //frame.add(panel3,BorderLayout.NORTH);
-        //frame.add(panel4,BorderLayout.SOUTH);
+
+        JButton buttonSaveAQuit=new JButton("SAVE & QUIT");
+        buttonSaveAQuit.setSize(okraje.width*4,100);
+        buttonSaveAQuit.setPreferredSize(new Dimension(okraje.width*4,100));
+        buttonSaveAQuit.setBackground(new Color(11, 32, 55));
+        buttonSaveAQuit.setFont(new Font("Comic Sans MS", Font.BOLD,30));
+        buttonSaveAQuit.setForeground(new Color(171, 184, 230));
+        buttonSaveAQuit.setBorderPainted(false);
+        buttonSaveAQuit.setFocusPainted(false);
+        panel.add(buttonSaveAQuit);
+        buttonSaveAQuit.addActionListener(e -> {
+
+
+
+            frame.dispose();
+        });
+
 
         menuText.setAlignmentX(Component.CENTER_ALIGNMENT);
         buttonPlay.setAlignmentX(Component.CENTER_ALIGNMENT);
         buttonFishIndex.setAlignmentX(Component.CENTER_ALIGNMENT);
         buttonHelp.setAlignmentX(Component.CENTER_ALIGNMENT);
+        buttonRestart.setAlignmentX(Component.CENTER_ALIGNMENT);
+        buttonSaveAQuit.setAlignmentX(Component.CENTER_ALIGNMENT);
         background.add(panel);
         frame.add(background);
         frame.pack();
